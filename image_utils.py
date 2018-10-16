@@ -14,7 +14,8 @@ def create_yahoo_image_loader():
     from io import BytesIO
 
     def load_image(image_path):
-        pimg = open(image_path, 'rb').read()
+        img_file = open(image_path, 'rb')
+        pimg = img_file.read()
 
         img_data = pimg
         im = Image.open(BytesIO(img_data))
@@ -46,6 +47,7 @@ def create_yahoo_image_loader():
         image -= np.array(VGG_MEAN, dtype=np.float32)
 
         image = np.expand_dims(image, axis=0)
+        img_file.close()
         return image
 
     return load_image
